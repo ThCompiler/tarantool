@@ -9,7 +9,7 @@ PRODUCT_NAME = tarantool
 VARDIR ?=/tmp/t
 OUTPUT_DIR ?=${PWD}/build
 
-GIT_DESCRIBE = $(shell git describe HEAD)
+GIT_DESCRIBE = $(shell git describe --tags HEAD)
 GIT_TAG = $(shell git tag --points-at HEAD)
 MAJOR_VERSION = $(word 1, $(subst ., ,${GIT_DESCRIBE}))
 MINOR_VERSION = $(word 2, $(subst ., ,${GIT_DESCRIBE}))
@@ -40,7 +40,7 @@ package: prepare
 		if [ -n "${GIT_TAG}" ]; then \
 			export VERSION="$$(echo ${GIT_TAG} | sed 's/-/~/')"; \
 		else \
-			export VERSION="123123.dev"; \
+			export VERSION="$$(echo ${GIT_DESCRIBE} | sed ${SED_REPLACE_VERSION_REGEX} | sed 's/-/~/').dev"; \
 		fi; \
 	fi; \
 	echo VERSION=$${VERSION}; \

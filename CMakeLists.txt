@@ -343,7 +343,7 @@ if(NOT TARANTOOL_VERSION)
     # directories.
     #
     if (EXISTS "${CMAKE_SOURCE_DIR}/.git" AND GIT)
-        execute_process (COMMAND ${GIT} describe --long HEAD
+        execute_process (COMMAND ${GIT} describe --long --tags HEAD
             OUTPUT_VARIABLE TARANTOOL_GIT_VERSION
             OUTPUT_STRIP_TRAILING_WHITESPACE
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
