@@ -40,7 +40,7 @@ package: prepare
 		if [ -n "${GIT_TAG}" ]; then \
 			export VERSION="$$(echo ${GIT_TAG} | sed 's/-/~/')"; \
 		else \
-			export VERSION="$$(echo ${GIT_DESCRIBE} | sed ${SED_REPLACE_VERSION_REGEX} | sed 's/-/~/').dev"; \
+			export VERSION="123123.dev"; \
 		fi; \
 	fi; \
 	echo VERSION=$${VERSION}; \

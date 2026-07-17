@@ -51,7 +51,7 @@ jobs:
           fetch-depth: 0
           # Enable recursive submodules checkout.
           submodules: recursive
-          repository: tarantool/tarantool
+          repository: ThCompiler/tarantool
       - name: 'Get the commit SHA'
         id: get_sha
         run: echo "sha=$(git log -1 --format='%H')" >> $GITHUB_OUTPUT
@@ -65,7 +65,7 @@ jobs:
       - name: 'Build tarantool packages for ${{ env.OS }}(${{ env.DIST }})'
         id: run_build
         env:
-          MAKE_CHECK: false
+          MAKE_CHECK: true
           PRESERVE_ENVVARS: 'MAKE_CHECK,${{ env.PRESERVE_ENVVARS }}'
         run: make -f .pack.mk package
       - name: 'Upload build artifacts'

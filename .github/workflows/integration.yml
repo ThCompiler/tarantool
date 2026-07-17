@@ -49,14 +49,13 @@ jobs:
   tarantool:
     # Run on push to the 'master' and release branches of tarantool/tarantool
     # or on pull request if the 'full-ci' or 'integration-ci' label is set.
-    if: github.repository_owner == 'tarantool' &&
-        ( github.event_name != 'pull_request' ||
+    if: ( github.event_name != 'pull_request' ||
           contains(github.event.pull_request.labels.*.name, 'full-ci') ||
           contains(github.event.pull_request.labels.*.name, 'integration-ci') )
 
     uses: ./.github/workflows/reusable_build.yml
     with:
-      ref: ${{ inputs.tarantool_revision || github.ref }}
+      ref: ${{ github.ref }}
       os: ubuntu
       dist: noble
       submodule: ${{ inputs.submodule }}
